@@ -9,8 +9,8 @@ import datetime
 
 #通过查询单独ip进行端口收集
 def FofaCollectInfo(ip):
-    email = r'ITsec@inovance.com'
-    api_key = r'91622b0473aefc9511f463a272484ad9'
+    email = r'XXXXXXXX'
+    api_key = r'XXXXXXXXX'
     api = r'https://fofa.info/api/v1/search/all?email={}&key={}&qbase64={}&size={}&fields={}&full={}'
     fields = ("ip,port,protocol,host,os,server,lastupdatetime")
     arg_domain1 = "ip=\""
@@ -36,7 +36,7 @@ def FofaCollectInfo(ip):
         file.write(content)
     return
 
-#FofaCollectInfo("58.60.228.150")
+
 def ExcelReadIp(xlsxname):
 
 
@@ -67,4 +67,3 @@ for i in data:
     j = j+1
     FofaCollectInfo(i)
     print(i + '     ' + str(j)+'/' + n)
-# FofaCollectInfo('112.25.144.78')

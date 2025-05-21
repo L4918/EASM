@@ -81,7 +81,7 @@ for key in dictkey.keys():
 
 for index in complement_list:
     temp = [addata[index][1],addata[index][2],'','',addata[index][3],addata[index][4],'','Inovance','',
-            '',addata[index][0],'中国','深苏','深苏','','','','','','','',addata[index][5]]
+            '',addata[index][0],'中国','','','','','','','','','',addata[index][5]]
     #print(temp)
     collectdata.append(temp)
 

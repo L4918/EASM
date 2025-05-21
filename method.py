@@ -6,19 +6,8 @@ import openpyxl as xl
 import json
 from ADInfoProcess import *
 
-# 老域名
-# DomainList = ["inovance.com","inovance.xyz","inovance.cn","inovance-automotive.com","iotdataserver.cn",
-#               "iotdataserver.net","dataserver.cn","szmctc.com","shbst.com","inovance-iv.cn","jskwt.com",
-#               "esto.cn","zdkj-dl.cn","inovance.eu","inovance.ind.in","sbclinear.co.kr",
-#               "eksys.cn","inomag.cn","sh-laien.com","mobst.cn","inova-automation.com"]
-
 #2/25新域名统计
-DomainList = ["inovance.com", "inovance.xyz", "dataserver.cn","inocube.net","powerautomation.cn", "powerautomation.com.cn","inovance.net", "inovance.mobi",
-              "inovance.cn", "inovance-automotive.com", "szmctc.com", "shbst.com", "inovance-iv.cn", "jskwt.com", "asconast.com",
-              "esto.cn", "weton-inc.com", "weton.net", "zdkj-dl.cn", "eksys.cn", "inomag.cn", "sh-laien.com", "mobst.cn",
-              "inova-automation.com", "inovance.de", "inovance.ch", "inovance.hk", "inovance.it", "inovance.hu", "inovance.eu",
-              "inovance.ind.in", "sbclinear.co.kr", "iotdataserver.net", "iotdataserver.cn", "inoecloud.com",
-              "eksys.com", "inoplanet.com", "shbstcloud.com", "smart-driving.com.cn", "zkltvision.com"]
+DomainList = ["baidu.com"]
 
 
 Fofasign = 1
@@ -64,8 +53,8 @@ def MakeDir():
 '''
 
 def FofaCollectInfo(domain,fofa_dir_name):
-    email = r'ITsec@inovance.com'
-    api_key = r'91622b0473aefc9511f463a272484ad9'
+    email = r'XXXXXXXX'
+    api_key = r'XXXXXXXXXX'
     api = r'https://fofa.info/api/v1/search/all?email={}&key={}&qbase64={}&size={}&fields={}&full={}'
     fields = ("ip,port,protocol,country,country_name,region,city,host,domain,os,server,icp,title,"
               "jarm,banner,cert,link,tls_ja3s,tls_version,product,product_category,version,lastupdatetime,cname")
@@ -189,7 +178,7 @@ def FofaInfoOrganize(dirname):
 
 def QuakeCollectInfo(domain,quake_dir_name):
     headers = {
-        "X-QuakeToken": "ddfb0e1a-0026-40f3-9417-b187c304b9a2"
+        "X-QuakeToken": "XXXXXXXXXX"
     }
     request_domain = "domain:" + domain
     data = {
@@ -223,27 +212,18 @@ def QuakeSingleResponseProcess(filename,data_all,dict_domain2depart,dict_domain2
         data.append(item['service']['name'])
         domain = item['domain']
 
-        # Quake的域名都是三级或四级域名，这里需要二级域名与FOFA收集到的保持一致，同时需要使用二级域名从表中搜索公司表示信息
         domain_split = domain.split('.')
         domain_name = domain_split[-2] + '.' + domain_split[-1]
 
-        if domain_name == 'ind.in':
-            domain_name = 'inovance.ind.in'
 
-        if domain_name == 'co.kr':
-            domain_name = 'sbclinear.co.kr'
 
         data.append(domain_name)
 
-        #data.append(dict_domain2depart[domain_name])
-        #data.append(dict_domain2company[domain_name])
+
         data.append(item['service']['http']['server'])
         data.append(item['service']['http']['http_load_url'][0])
 
         title = item['service']['http']['title']
-
-        # if title == '\u200e':
-        #     title = ''
 
         data.append(title)
         data.append(item['location']['country_cn'])
